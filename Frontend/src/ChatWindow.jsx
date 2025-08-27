@@ -38,12 +38,9 @@ function ChatWindow() {
 
     //Append new chat to prevChats
     useEffect(() => {
-        if(prompt && reply) {
+        if(reply) {
             setPrevChats(prevChats => (
                 [...prevChats, {
-                    role: "user",
-                    content: prompt
-                },{
                     role: "assistant",
                     content: reply
                 }]
@@ -51,7 +48,7 @@ function ChatWindow() {
         }
 
         setPrompt("");
-    }, [reply]);
+    }, [reply, setPrevChats, setPrompt]);
 
 
     const handleProfileClick = () => {
@@ -69,9 +66,9 @@ function ChatWindow() {
             {
                 isOpen && 
                 <div className="dropDown">
-                    <div className="dropDownItem"><i class="fa-solid fa-gear"></i> Settings</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-cloud-arrow-up"></i> Upgrade plan</div>
-                    <div className="dropDownItem"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
+                    <div className="dropDownItem"><i className="fa-solid fa-gear"></i> Settings</div>
+                    <div className="dropDownItem"><i className="fa-solid fa-cloud-arrow-up"></i> Upgrade plan</div>
+                    <div className="dropDownItem"><i className="fa-solid fa-arrow-right-from-bracket"></i> Log out</div>
                 </div>
             }
             <Chat></Chat>
