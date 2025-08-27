@@ -1,6 +1,7 @@
 import express from "express";
 import Thread from "../models/Thread.js";
-import getOpenAIAPIResponse from "../utils/openai.js";
+// Update the import statement to use the Gemini API utility.
+import getGeminiAPIResponse from "../utils/gemini.js";
 
 const router = express.Router();
 
@@ -88,7 +89,8 @@ router.post("/chat", async(req, res) => {
             thread.messages.push({role: "user", content: message});
         }
 
-        const assistantReply = await getOpenAIAPIResponse(message);
+        // Use the new Gemini API function to get the response.
+        const assistantReply = await getGeminiAPIResponse(message);
 
         thread.messages.push({role: "assistant", content: assistantReply});
         thread.updatedAt = new Date();
@@ -100,8 +102,5 @@ router.post("/chat", async(req, res) => {
         res.status(500).json({error: "something went wrong"});
     }
 });
-
-
-
 
 export default router;
