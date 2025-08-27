@@ -90,7 +90,8 @@ router.post("/chat", async(req, res) => {
         }
 
         // Use the new Gemini API function to get the response.
-        const assistantReply = await getGeminiAPIResponse(message);
+        // The correction is here: passing the full messages array instead of just the message string.
+        const assistantReply = await getGeminiAPIResponse(thread.messages);
 
         thread.messages.push({role: "assistant", content: assistantReply});
         thread.updatedAt = new Date();
